@@ -169,6 +169,7 @@ p {
 
 .nav-toggle {
   display: none;
+  position: relative;
   width: 46px;
   height: 46px;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -179,12 +180,35 @@ p {
 }
 
 .nav-toggle span {
-  display: block;
-  width: 100%;
+  position: absolute;
+  left: 9px;
+  top: calc(50% - 1px);
+  width: 26px;
   height: 2px;
-  margin: 5px 0;
+  transform: translateY(-7px);
   background: #fff;
   border-radius: 10px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle span:nth-child(2) {
+  transform: none;
+}
+
+.nav-toggle span:nth-child(3) {
+  transform: translateY(7px);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg);
 }
 
 .hero {
@@ -337,8 +361,8 @@ p {
 }
 
 .floating-card {
-  left: 10px;
-  bottom: 0;
+  right: 150px;
+  bottom: 5px;
   width: min(76%, 290px);
   padding: 22px 18px;
   background: linear-gradient(135deg, var(--brand-maroon), var(--brand-maroon-deep));
@@ -392,7 +416,7 @@ p {
   align-items: stretch;
 }
 
-.vision-layout > .section-head {
+.vision-layout>.section-head {
   align-self: center;
 }
 
@@ -627,6 +651,7 @@ p {
 }
 
 @media (max-width: 920px) {
+
   .hero-grid,
   .two-col,
   .sports-grid,
@@ -642,7 +667,7 @@ p {
     grid-template-columns: 1fr;
   }
 
-  .vision-layout > .section-head {
+  .vision-layout>.section-head {
     align-self: auto;
   }
 
@@ -681,12 +706,35 @@ p {
     display: block;
   }
 
-  .hero-panel {
-    min-height: 320px;
+}
+
+@media (min-width: 621px) and (max-width: 920px) {
+  .main-card {
+    right: auto;
+    left: 0;
+  }
+
+  .floating-card {
+    right: auto;
+    left: 20px;
   }
 }
 
 @media (max-width: 620px) {
+  .hero-panel {
+    margin-inline: 12px;
+  }
+
+  .main-card {
+    right: 0;
+  }
+
+  .floating-card {
+    right: auto;
+    bottom: -50px;
+    left: 10px;
+  }
+
   .vision-grid {
     grid-template-columns: 1fr;
   }
@@ -717,12 +765,4 @@ p {
     padding: 72px 0;
   }
 
-  .main-card {
-    width: 100%;
-    right: 0;
-  }
-
-  .floating-card {
-    width: 72%;
-  }
 }
